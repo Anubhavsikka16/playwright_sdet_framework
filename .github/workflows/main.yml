@@ -18,6 +18,7 @@ jobs:
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
       USERNAME: ${{ secrets.USERNAME }}
       PASSWORD: ${{ secrets.PASSWORD }}
+      HEADLESS: ${{ secrets.HEADLESS }}
     steps:
 
     - name: Checkout repository
