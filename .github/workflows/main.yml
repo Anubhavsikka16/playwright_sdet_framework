@@ -20,47 +20,52 @@ jobs:
       HEADLESS: ${{ secrets.HEADLESS }}
 
     steps:
-      # 📥 Checkout
+      # 📥 Checkout your framework repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 🐍 Python setup
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      # 🟢 Clone Cypress RealWorld App (FIX for your error)
+      - name: Clone Cypress RealWorld App
+        run: |
+          git clone https://github.com/cypress-io/cypress-realworld-app.git
 
-      # 🟢 Node setup (FIXED INDENTATION)
+      # 🟢 Setup Node (required for app)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      # 📦 Install Cypress app deps
+      # 📦 Install app dependencies
       - name: Install app dependencies
         run: |
           cd cypress-realworld-app
           yarn install
 
-      # 🗄️ Seed DB
-      - name: Seed DB
+      # 🗄️ Seed database
+      - name: Seed database
         run: |
           cd cypress-realworld-app
           yarn db:seed:dev
 
-      # 🚀 Start app
+      # 🚀 Start app (frontend + backend)
       - name: Start app
         run: |
           cd cypress-realworld-app
           export TS_NODE_TRANSPILE_ONLY=true
           yarn dev &
 
-      # ⏳ Wait for app (BETTER than sleep)
+      # ⏳ Wait until app is ready (VERY IMPORTANT)
       - name: Wait for app
         run: npx wait-on http://localhost:3000
 
-      # 🐍 Install Python deps
-      - name: Install dependencies
+      # 🐍 Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 📦 Install Python dependencies
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt || true
@@ -68,6 +73,17 @@ jobs:
           pip install allure-pytest pytest-html pytest-xdist requests
           playwright install --with-deps
 
-      # 🧪 Run tests
-      - name: Run Playwright Tests
+      # 🧪 Run Playwright tests
+      - name: Run tests
         run: pytest
+
+      # 📊 Upload test reports (optional but recommended)
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            allure-results/
+            playwright-report/
+            test-results/
