@@ -1,0 +1,24 @@
+name: Local AI Coding Setup
+version: 1.0.0
+schema: v1
+
+models:
+  - name: DeepSeek Coder
+    provider: ollama
+    model: deepseek-coder:6.7b
+
+  - name: Qwen 2.5 Coder
+    provider: ollama
+    model: qwen2.5-coder:7b
+
+  - name: Qwen 3 Coder
+    provider: ollama
+    model: qwen3-coder
+
+  - name: Codestral (Mistral Code)
+    provider: ollama
+    model: codestral
+
+  - name: StarCoder2
+    provider: ollama
+    model: starcoder2

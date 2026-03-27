@@ -1,0 +1,63 @@
+.env.prod
+.env.*
+env.*
+*.env
+*.env.*
+
+# 🔹 Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 🔹 Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# 🔹 Pytest cache
+.pytest_cache/
+
+# 🔹 Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+
+# 🔹 Logs
+*.log
+
+# 🔹 Environment variables
+.env
+
+# 🔹 IDE files
+.vscode/
+.idea/
+
+# 🔹 OS files
+.DS_Store
+Thumbs.db
+
+# 🔹 Build files
+dist/
+build/
+*.egg-info/
+
+# 🔹 Allure reports
+allure-results/
+allure-report/
+
+# 🔹 Test reports
+reports/
+test-output/
+
+# 🔹 Temporary files
+*.tmp
+*.swp
+
+# 🔹 Database files (if used)
+*.db
+*.sqlite3
+
+# 🔹 Node (if hybrid project)
+node_modules/
