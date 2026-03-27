@@ -30,6 +30,32 @@ jobs:
       with:
         python-version: '3.11'
 
+    # 🟢 Setup Node (VERY IMPORTANT for Cypress app)
+    - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # 📦 Install app dependencies
+    - name: Install app dependencies
+        run: |
+          cd cypress-realworld-app
+          yarn install
+
+      # 🗄️ Seed database
+    - name: Seed DB
+        run: |
+          cd cypress-realworld-app
+          yarn db:seed:dev
+
+      # 🚀 Start app (frontend + backend)
+    - name: Start app
+        run: |
+          cd cypress-realworld-app
+          export TS_NODE_TRANSPILE_ONLY=true
+          yarn dev &
+          sleep 15   # wait for app to start
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
