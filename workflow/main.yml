@@ -11,9 +11,9 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
-    environment: staging
+    environment: env_prod
     env:
-      ENV: staging
+      ENV: production
       BASE_URL: ${{ secrets.BASE_URL }}
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
       USERNAME: ${{ secrets.USERNAME }}
