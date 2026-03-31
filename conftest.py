@@ -4,16 +4,24 @@ from core.config import Config
 from services.auth_service import AuthService
 import allure
 import os
+'''
+It provides:
+
+browser setup and teardown
+auth token fixture
+API client fixture
+DB fixture
+test failure reporting
+tracing
+Allure attachments
+'''
+
 
 # ================================
 # 🧠 HOOK: Capture Test Result
 # ================================
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """
-    Attach test result (pass/fail) to test node
-    Used by fixtures for conditional logic
-    """
     outcome = yield
     result = outcome.get_result()
 
@@ -53,7 +61,7 @@ def page(request):
         # =========================
         # 🔥 FAILURE HANDLING
         # =========================
-        if request.node.rep_call.failed:
+        if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
 
             # 📸 Screenshot
             screenshot = page.screenshot()

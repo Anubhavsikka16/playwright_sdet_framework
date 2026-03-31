@@ -1,13 +1,22 @@
 import requests
 from core.config import Config as config
-
+#“APIClient is a reusable wrapper around the Requests library. 
+# It standardizes request handling, headers, and authentication across the framework.”
 class APIClient:
     """
-    Handles all HTTP calls
+    What it handles
+        --> GET requests
+        --> POST requests
+        --> authorization token
+        --> JSON headers
     """
 
     def __init__(self):
-        self.base_url = config.API_URL
+        self.base_url = config.API_BASE_URL
+
+        if not self.base_url:
+            raise ValueError("API_BASE_URL is NOT set in environment!")
+
         self.token = None
 
     def set_token(self, token):

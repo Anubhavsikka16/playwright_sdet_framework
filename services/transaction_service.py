@@ -1,4 +1,11 @@
 from api.clients.api_client import APIClient
+'''
+How it connects
+uses APIClient
+receives token during initialization
+used in API validation or E2E validation
+
+'''
 
 class TransactionService:
 

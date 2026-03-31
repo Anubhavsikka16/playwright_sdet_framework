@@ -1,6 +1,6 @@
 import pymysql
 from core.config import Config
-
+#Used by the db fixture in conftest.py
 class DBClient:
     """
     Database connection handler

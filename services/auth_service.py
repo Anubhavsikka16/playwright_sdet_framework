@@ -1,5 +1,13 @@
-from api.api_client import APIClient
+from api.clients.api_client import APIClient
 from core.config import Config
+'''
+Main responsibilities
+create APIClient instance
+send login request
+assert login success
+return token
+
+'''
 
 class AuthService:
     """
